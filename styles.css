@@ -1,0 +1,86 @@
+body{
+    margin: 0;
+}
+.flex-container{
+    display: flex;
+    border: solid blue 1px;
+    flex-direction: column;
+    height: 99.8vh;
+}
+.flex-header{
+    display: flex;
+    border: solid green 1px;
+    height: 8vh;
+    flex-direction: row;
+}
+.flex-header-contents{
+    border: solid mediumaquamarine 1px;
+}
+.flex-header-blank-space{
+    flex-grow: 1;
+    border: solid black 1px;
+}
+.flex-header-logo{
+    background: url("https://images.unsplash.com/photo-1534538495100-e945f7a5a9c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+    background-size: auto;
+    background-repeat: no-repeat;
+    border: solid chocolate 1px;
+    width: 10vh;
+}
+.flex-header-menu{
+    display: flex;
+    flex-direction: row;
+}
+.flex-header-menu-about{
+    border: solid crimson 1px;
+    padding-right: 5px;
+}
+.flex-header-menu-cheapest-places{
+    border: solid darkblue 1px;
+}
+
+.flex-main{
+    border: solid black 1px;
+    flex-grow: 1;
+    height: 100%;
+    background:url("https://images.unsplash.com/photo-1553602924-f9b35269e68b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1416&q=80");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+}
+
+.flex-main-content{
+    flex-direction: column;
+    height: 30%;
+    width: 30%;
+    margin-left: 55vh;
+    margin-top: 20vh;
+    border: thin solid darkblue;
+}
+
+.flex-main-content-information{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10%;
+    border: thin solid black;
+}
+.main-content-city{
+    margin-right: 10px;
+    border: thin solid wheat;
+    width: 100%;
+}
+.main-content-destination{
+    height: 20px;
+    width: 100%;
+}
+.main-content-date{
+    margin-top: 10px;
+    border: solid green 1px;
+}
+
+.flex-footer{
+    border: solid purple 1px;
+    height: 25vh;
+    display: flex;
+    flex-direction: row;
+}
