@@ -1,80 +1,143 @@
-fetch = require("node-fetch")
+import "babel-polyfill"
+import * as website from "./components/index.js"
+import * as state from "./store"
+import Navigo from "navigo"
+import { capitalize } from "lodash"
+import axios from "axios"
 const proxy = 'https://cors-anywhere.herokuapp.com/'
-const token = 'a4afad13a7337940879a2f94505872ab'
-let cityUrl = 'http://api.travelpayouts.com/data/en/cities.json?token='
-const airportUrl = 'http://api.travelpayouts.com/data/en/airports.json?token='
-let ip = 'http://ip-api.com/json'
-// List of urls to parse 
-let urls = [
-    ip,
-    cityUrl+token,
-    airportUrl+token
-]
-Promise.all(urls.map(url=>
-    fetch(url)
-    .then(checkStatus)
-    .then(parseJson)
-    .catch(logError)
-    ))
-    .then(parseAllData)
-    .catch(logError)
-// checks if there is a json file
-function checkStatus(result){
-    if(!result.status){
-        throw Error("You have an error")
-    }
-    // if there is result gets passes onto the next .then
-    return result
-}
-// turns result into json format
-function parseJson(result){
-    return result.json()
-}
-// logs error if there is one
-function logError(err){
-    console.log(err)
+
+//Main function
+function render(st){
+    document.querySelector('#root').innerHTML = `
+    ${website.Header(state.Links)}
+    ${website.Main(st)}
+    ${website.Footer()}
+    `
+    router.updatePageLinks()
+    addNavListener()
+    submitListener()
 }
 
-function flights(data){
-    for(flightInformation of data.data){
-        console.log(flightInformation.value, flightInformation.origin)
-    }
-}
+//Routes
+const router = new Navigo(window.location.origin)
+router
+    .on({
+        ":page": ({page}) => render(state[capitalize(page)]),
+        "/": () => render(state.Home)
+    })
+.resolve()
 
-function listOfCities(list){
-    originCity = list[0]
-    destinationCity = list[1]
-    url = `http://api.travelpayouts.com/v2/prices/latest?origin=${originCity}&destination=${destinationCity}&currency=usd&period_type=year&page=1&limit=30&show_to_affiliates=true&sorting=price&trip_class=0&token=${token}`
-    fetch(url)
-    .then(checkStatus)
-    .then(parseJson)
-    .then(flights)
-    .catch(logError)
-}
-function parseAllData(data){
-    let destination = "Dallas" ///document element destination
-    let start = "Saint Louis" /// document element origin
-    user = data[0]
-    cities = data[1]
-    airports = data[2]
-    cityList = []
-    for(city of cities){
-        for(airport of airports){
-            if((city.name === start || city.name === destination) && (city.code === airport.code) && (airport.flightable) && (user.countryCode === airport.country_code)){
-                cityList.push(city.code)
+
+//Home Page Search
+function submitListener(){
+    document.getElementById('submit').addEventListener("click", event=>{
+        let origin = document.getElementById('origin').value
+        let destination = document.getElementById('destination').value
+        let departure = document.getElementById('dep-date').value
+        let returnDate = document.getElementById('rtn-date').value
+        // gets a list of all cities
+        axios.get(proxy+'http://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
+    .then(response=>{
+        response.data.map(keys=>{
+            // checks if city is equal to origin
+            if(keys.name === origin){
+                state.result.originName = keys.name
+                state.result.originCode  = keys.code
             }
-        }
-    }
-    listOfCities(cityList)
+            // check if city is equal to Destination
+            if(keys.name === destination){
+                state.result.destCode = keys.code
+                state.result.destName = keys.name
+            }
+        })
+        getUserCity(state.result.originCode, state.result.destCode, departure, returnDate)
+    })
+    .catch(err=>{console.log("ERROR1",err)})
+    // Renders the page
+    render(state.result)
+    })
 }
-// document.getElementById('myButton').addEventListener('click', function(){
-//     Promise.all(urls.map(url=>
-//         fetch(url)
-//         .then(checkStatus)
-//         .then(parseJson)
-//         .catch(logError)
-//         ))
-//         .then(parseAllData)
-//         .then(userLocation)
-// })
+// gets information after click
+function getUserCity(or, d, dd, rd){
+    // Looks up the city by IATA code
+    axios.get(proxy+`http://api.travelpayouts.com/v2/prices/week-matrix?currency=usd&origin=${or}&destination=${d}&show_to_affiliates=true&depart_date=${dd}&return_date=${rd}&token=a4afad13a7337940879a2f94505872ab`)
+    .then(response=>{
+        response.data.data.map(key=>{
+            // Pushes dates and the price to result.js
+            state.result.departDate.push(key.depart_date)
+            state.result.returnDate.push(key.return_date)
+            state.result.price.push(key.value)
+        })
+    })
+    .catch(err=>{console.log("ERROR2", err)})
+}
+//Nav for Home page Nav Menu
+function addNavListener(){
+    const elements = document.getElementsByClassName("menu-items")
+    for(let x=0; x<elements.length; x++){
+        elements[x].addEventListener("click", event =>{
+            event.preventDefault();
+            const text = state[event.target.textContent]
+            render(text)
+        })
+    }
+}
+//Popular Page
+axios
+.get('http://www.travelpayouts.com/whereami?locale=en&ip=')
+.then(response=>{
+    tickets(response.data.iata)
+    findPopularCity(response.data.iata);
+})
 
+function findPopularCity(iata){
+    axios
+    .get(proxy+`http://api.travelpayouts.com/v1/city-directions?origin=${iata}&currency=usd&token=a4afad13a7337940879a2f94505872ab`)
+    .then(response=>{
+        popularCityCodeToName(response.data.data);
+    });
+}
+function popularCityCodeToName(code){
+    axios.get(proxy+'http://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
+    .then(response=>{
+        response.data.map(key=>{
+            Object.keys(code).map(codeKey=>{
+                if(key.code === codeKey){
+                    getCityPicture(key.name)
+                }
+            })
+        })
+    })
+};
+function getCityPicture(cityName){
+    axios.get(`https://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=${cityName}&image_type=photo&category=travel`)
+    .then(response=>{
+        state.Popular.picture.push(response.data.hits[0].webformatURL)
+        state.Popular.cityName.push(cityName)
+    })
+}
+
+
+//Cheapest Tickets page
+function tickets(code){
+    axios.get(proxy+`http://api.travelpayouts.com/v1/prices/cheap?currency=usd&origin=${code}&destination=-&token=a4afad13a7337940879a2f94505872ab`)
+    .then(resp=>{
+        Object.keys(resp.data.data).map((value, index)=>{
+            state.Cheapest.code.push(value)
+            let x = Object.values(resp.data.data[value])
+        })
+        city()
+    }) 
+}
+
+function city(){
+    axios.get(proxy+'http://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
+    .then(response=>{
+        response.data.map(key=>{
+            state.Cheapest.code.map(codeKey=>{
+                if(key.code === codeKey){
+                }
+            })
+        })
+    })
+}
