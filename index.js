@@ -13,11 +13,13 @@ function render(st){
     ${website.Main(st)}
     ${website.Footer()}
     `
+    console.log(st)
     router.updatePageLinks()
     addNavListener()
-    submitListener()
+    if(st.view === "Home"){
+        submitListener()
+    }
 }
-
 //Routes
 const router = new Navigo(window.location.origin)
 router
@@ -26,7 +28,7 @@ router
         "/": () => render(state.Home)
     })
 .resolve()
-
+console.log(router)
 
 //Home Page Search
 function submitListener(){
@@ -53,8 +55,8 @@ function submitListener(){
         getUserCity(state.result.originCode, state.result.destCode, departure, returnDate)
     })
     .catch(err=>{console.log("ERROR1",err)})
-    // Renders the page
-    render(state.result)
+            // Renders the page
+            render(state.result)
     })
 }
 // gets information after click

@@ -1,0 +1,8 @@
+export { default as Home } from "./Home"
+export { default as Popular } from "./Popular"
+export { default as Cheapest } from "./Cheapest"
+export { default as Contact } from "./Contact"
+export { default as About } from "./About"
+export { default as Links } from "./navBarLinks"
+export { default as result } from "./result"
+export { default as Cities } from "./allCities"
