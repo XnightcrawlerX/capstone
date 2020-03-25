@@ -30,7 +30,14 @@ router
 .resolve()
 console.log(router)
 
-//Home Page Search
+//Home Page Search ----------------------start---------------------------
+// IMPORTANT:
+//for origin enter New Mexico
+// for destination enter Moscow
+//use todays date for the first one
+// use week from today (or around there) for the second one
+//this is so results acualy get loaded
+//**note: NO RESULTS WILL POP UP THE FIRST TIME you will have to redo the process again exactly the same way <- that is my issue
 function submitListener(){
     document.getElementById('submit').addEventListener("click", event=>{
         let origin = document.getElementById('origin').value
@@ -73,6 +80,7 @@ function getUserCity(or, d, dd, rd){
     })
     .catch(err=>{console.log("ERROR2", err)})
 }
+//----------------------end---------------------------
 //Nav for Home page Nav Menu
 function addNavListener(){
     const elements = document.getElementsByClassName("menu-items")
