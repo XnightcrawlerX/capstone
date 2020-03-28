@@ -4,5 +4,6 @@ export default{
     origin: [],
     code: [],
     cityName: [],
-    picture: []
+    picture: [],
+    price: []
 }
