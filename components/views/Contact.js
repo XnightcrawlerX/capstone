@@ -14,7 +14,7 @@ export default () => {
     <h4>need instant support?</h4>
     <p class=bh>&#8226 dimarobertson@gmail.com<br>&#8226 636-293-8601</p>
     <p class="bh1">&#8226 405 n. st.<br>Saint Charles, Mo. 63304<br>United States
-    <div>
+    </div>
     </section>
 </section>
 `

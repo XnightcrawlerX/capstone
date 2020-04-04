@@ -15,6 +15,7 @@ async function render(st){
     `;
     router.updatePageLinks();
     addNavListener();
+    barMenu();
 };
 //Routes
 const router = new Navigo(window.location.origin);
@@ -25,6 +26,17 @@ router
     })
 .resolve();
 console.log(router);
+
+//Bar menu, Onclick even
+function barMenu(){
+    document.getElementById("Menu").addEventListener("click",event=>{
+        if(document.getElementById("dropdown").style.display === "grid"){
+            document.getElementById("dropdown").style.display = "none";
+        }else{
+            document.getElementById("dropdown").style.display = "grid";
+        };
+    });
+};
 
 //Home Page Search ----------------------start---------------------------
 async function getCity(){
@@ -42,6 +54,8 @@ document.getElementById('submit').addEventListener("click", event=>{
     let destination = document.getElementById('destination').value;
     let departure = document.getElementById('dep-date').value;
     let returnDate = document.getElementById('rtn-date').value;
+    console.log(returnDate)
+    console.log(origin,destination,departure,returnDate);
     getCity()
         .then(response=>{
             response.data.map(keys=>{
@@ -50,13 +64,13 @@ document.getElementById('submit').addEventListener("click", event=>{
                     state.result.originName = keys.name;
                     state.result.originCode  = keys.code;
                 };
-                // check if city is equal to Destination
+                // check if @city is equal to Destination
                 if(keys.name === destination){
                     state.result.destCode = keys.code;
                     state.result.destName = keys.name;
                 };
             });
-            return response
+            return response;
         })
         .then(resp =>{
             searchForTicket(state.result.originCode, state.result.destCode, departure, returnDate)
@@ -67,11 +81,11 @@ document.getElementById('submit').addEventListener("click", event=>{
                     state.result.returnDate.push(key.return_date);
                     state.result.price.push(key.value);
                 });
-                render(state.result)
-            })
-        })
-})
-//----------------------end---------------------------
+                render(state.result);
+            });
+        });
+});
+
 //Nav for Home page Nav Menu
 function addNavListener(){
     const elements = document.getElementsByClassName("menu-items");
@@ -87,6 +101,7 @@ function addNavListener(){
 axios
 .get('http://www.travelpayouts.com/whereami?locale=en&ip=')
 .then(response=>{
+    state.Cheapest.origin = response.data.iata; 
     tickets(response.data.iata);
     findPopularCity(response.data.iata);
 });
@@ -114,8 +129,9 @@ function popularCityCodeToName(code){
     });
 };
 function getCityPicture(cityName){
-    axios.get(`https://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=${cityName}&image_type=photo&category=places`)
+    axios.get(`https://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=${cityName}+city&image_type=photo&category=places&editors_choice="true"`)
     .then(response=>{
+        console.log(response)
         state.Popular.picture.push(response.data.hits[0].webformatURL);
         state.Popular.cityName.push(cityName);
     });
@@ -126,40 +142,35 @@ function getCityPicture(cityName){
 function tickets(code){
     axios.get(proxy+`http://api.travelpayouts.com/v1/prices/cheap?currency=usd&origin=${code}&destination=-&token=a4afad13a7337940879a2f94505872ab`)
     .then(resp=>{
-        Object.keys(resp.data.data).map((value, index)=>{
-            state.Cheapest.code.push(value);
+        Object.keys(resp.data.data).map((value)=>{
             let x = Object.values(resp.data.data[value]);
-            state.Cheapest.airlineCode.push(x[0].airline)
-            state.Cheapest.flNum.push(x[0].flight_number)
-            state.Cheapest.price.push(x[0].price)
+            city(value,x[0].flight_number,x[0].price);
+            airportCodeToName(x[0].airline);
         });
-        city();
-        airportCodeToName();
-        console.log(state.Cheapest)
     });
 };
 
-function city(){
+function city(code, fn, p){
     axios.get(proxy+'http://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
     .then(response=>{
         response.data.map(key=>{
-            state.Cheapest.code.map(codeKey=>{
-                if(key.code === codeKey){
-                    state.Cheapest.name.push(key.name)
-                };
-            });
+            if(key.code === code){
+                state.Cheapest.flNum.push(fn);
+                state.Cheapest.price.push(p);
+                state.Cheapest.code.push(key.code);
+                state.Cheapest.name.push(key.name);
+            };
         });
     });
 };
-function airportCodeToName(){
+function airportCodeToName(code){
     axios.get(proxy+`http://api.travelpayouts.com/data/en/airlines.json?token=a4afad13a7337940879a2f94505872ab`)
     .then(resp=>{
         resp.data.map(key=>{
-            state.Cheapest.airlineCode.map(key2=>{
-                if(key.code === key2){
-                    state.Cheapest.airlineName.push(key.name)
-                }
-            })
-        })
-    })
-}
+            if(key.code === code){
+                state.Cheapest.airlineCode.push(code)
+                state.Cheapest.airlineName.push(key.name);
+            }
+        });
+    });
+};
