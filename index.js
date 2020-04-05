@@ -113,7 +113,7 @@ axios
 
 function findPopularCity(iata){
     axios
-    .get(proxy+`https://api.travelpayouts.com/v1/city-directions?origin=${iata}&currency=usd&token=a4afad13a7337940879a2f94505872ab`)
+    .get(`https://api.travelpayouts.com/v1/city-directions?origin=${iata}&currency=usd&token=a4afad13a7337940879a2f94505872ab`)
     .then(response=>{
         Object.keys(response.data.data).map(key=>{
             state.Popular.price.push(response.data.data[key].price)
@@ -122,7 +122,7 @@ function findPopularCity(iata){
     });
 };
 function popularCityCodeToName(code){
-    axios.get(proxy+'https://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
+    axios.get('https://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
     .then(response=>{
         response.data.map(key=>{
             Object.keys(code).map(codeKey=>{
