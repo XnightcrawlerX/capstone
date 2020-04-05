@@ -145,7 +145,7 @@ function getCityPicture(cityName){
 
 //Cheapest Tickets page
 function tickets(code){
-    axios.get(proxy+`http://api.travelpayouts.com/v1/prices/cheap?currency=usd&origin=${code}&destination=-&token=a4afad13a7337940879a2f94505872ab`)
+    axios.get(proxy+`https://api.travelpayouts.com/v1/prices/cheap?currency=usd&origin=${code}&destination=-&token=a4afad13a7337940879a2f94505872ab`)
     .then(resp=>{
         Object.keys(resp.data.data).map((value)=>{
             let x = Object.values(resp.data.data[value]);
@@ -156,7 +156,7 @@ function tickets(code){
 };
 
 function city(code, fn, p){
-    axios.get(proxy+'http://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
+    axios.get(proxy+'https://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
     .then(response=>{
         response.data.map(key=>{
             if(key.code === code){
@@ -169,7 +169,7 @@ function city(code, fn, p){
     });
 };
 function airportCodeToName(code){
-    axios.get(proxy+`http://api.travelpayouts.com/data/en/airlines.json?token=a4afad13a7337940879a2f94505872ab`)
+    axios.get(proxy+`https://api.travelpayouts.com/data/en/airlines.json?token=a4afad13a7337940879a2f94505872ab`)
     .then(resp=>{
         resp.data.map(key=>{
             if(key.code === code){
