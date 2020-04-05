@@ -4,7 +4,7 @@ import * as state from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
-const proxy = 'http://cors-anywhere.herokuapp.com/';
+const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 //Main function
 async function render(st){
