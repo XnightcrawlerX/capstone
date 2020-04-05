@@ -134,7 +134,7 @@ function popularCityCodeToName(code){
     });
 };
 function getCityPicture(cityName){
-    axios.get(`http://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=city of ${cityName}&image_type=photo&category=places&editors_choice="true"`)
+    axios.get(`https://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=city of ${cityName}&image_type=photo&category=places&editors_choice="true"`)
     .then(response=>{
         console.log(response)
         state.Popular.picture.push(response.data.hits[0].webformatURL);
