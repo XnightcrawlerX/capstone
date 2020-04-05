@@ -104,7 +104,7 @@ function addNavListener(){
 };
 //Popular Page
 axios
-.get(proxy+'https://www.travelpayouts.com/whereami?locale=en&ip=')
+.get('https://www.travelpayouts.com/whereami?locale=en&ip=')
 .then(response=>{
     state.Cheapest.origin = response.data.iata; 
     tickets(response.data.iata);
