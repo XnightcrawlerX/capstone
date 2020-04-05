@@ -10,6 +10,7 @@
         position: absolute;
         top: 9.6vh;
         left: 17vw;
+        z-index: 2;
     }
     /*Home page input form*/
     .results{

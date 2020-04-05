@@ -4,7 +4,7 @@ import * as state from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
-const proxy = 'https://cors-anywhere.herokuapp.com/';
+const proxy = 'http://cors-anywhere.herokuapp.com/';
 
 //Main function
 async function render(st){
@@ -17,6 +17,7 @@ async function render(st){
     addNavListener();
     barMenu();
 };
+
 //Routes
 const router = new Navigo(window.location.origin);
 router
@@ -25,7 +26,6 @@ router
         "/": () => render(state.Home)
     })
 .resolve();
-console.log(router);
 
 //Bar menu, Onclick even
 function barMenu(){
@@ -38,32 +38,37 @@ function barMenu(){
     });
 };
 
-//Home Page Search ----------------------start---------------------------
+//Home Page Search
+//__________________________
+//Api call to get information of every city
 async function getCity(){
-    const resp = await axios.get(proxy+'https://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab');
+    const resp = await axios.get(proxy+'http://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab');
     return resp
 };
+
+//Searches for travel tickets depending on user input
 async function searchForTicket(o, d, dd, rd){
-    const resp = await axios.get(proxy+`https://api.travelpayouts.com/v2/prices/week-matrix?currency=usd&origin=${o}&destination=${d}&show_to_affiliates=true&depart_date=${dd}&return_date=${rd}&token=a4afad13a7337940879a2f94505872ab`);
+    const resp = await axios.get(proxy+`http://api.travelpayouts.com/v2/prices/week-matrix?currency=usd&origin=${o}&destination=${d}&show_to_affiliates=true&depart_date=${dd}&return_date=${rd}&token=a4afad13a7337940879a2f94505872ab`);
     return resp;
 }
 
+//Nav listener for Home Page Input
 document.getElementById('submit').addEventListener("click", event=>{
     event.preventDefault()
     let origin = document.getElementById('origin').value;
     let destination = document.getElementById('destination').value;
     let departure = document.getElementById('dep-date').value;
     let returnDate = document.getElementById('rtn-date').value;
-    console.log(returnDate)
-    console.log(origin,destination,departure,returnDate);
     getCity()
         .then(response=>{
             response.data.map(keys=>{
+
                 // checks if city is equal to origin
                 if(keys.name === origin){
                     state.result.originName = keys.name;
                     state.result.originCode  = keys.code;
                 };
+                
                 // check if @city is equal to Destination
                 if(keys.name === destination){
                     state.result.destCode = keys.code;
@@ -99,7 +104,7 @@ function addNavListener(){
 };
 //Popular Page
 axios
-.get('https://www.travelpayouts.com/whereami?locale=en&ip=')
+.get('http://www.travelpayouts.com/whereami?locale=en&ip=')
 .then(response=>{
     state.Cheapest.origin = response.data.iata; 
     tickets(response.data.iata);
@@ -129,7 +134,7 @@ function popularCityCodeToName(code){
     });
 };
 function getCityPicture(cityName){
-    axios.get(`https://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=${cityName}+city&image_type=photo&category=places&editors_choice="true"`)
+    axios.get(`https://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=city of ${cityName}&image_type=photo&category=places&editors_choice="true"`)
     .then(response=>{
         console.log(response)
         state.Popular.picture.push(response.data.hits[0].webformatURL);
@@ -140,7 +145,7 @@ function getCityPicture(cityName){
 
 //Cheapest Tickets page
 function tickets(code){
-    axios.get(proxy+`http:s//api.travelpayouts.com/v1/prices/cheap?currency=usd&origin=${code}&destination=-&token=a4afad13a7337940879a2f94505872ab`)
+    axios.get(proxy+`https://api.travelpayouts.com/v1/prices/cheap?currency=usd&origin=${code}&destination=-&token=a4afad13a7337940879a2f94505872ab`)
     .then(resp=>{
         Object.keys(resp.data.data).map((value)=>{
             let x = Object.values(resp.data.data[value]);
