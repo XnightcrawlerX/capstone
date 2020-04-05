@@ -104,7 +104,7 @@ function addNavListener(){
 };
 //Popular Page
 axios
-.get('https://www.travelpayouts.com/whereami?locale=en&ip=')
+.get('http://www.travelpayouts.com/whereami?locale=en&ip=')
 .then(response=>{
     state.Cheapest.origin = response.data.iata; 
     tickets(response.data.iata);
@@ -113,7 +113,7 @@ axios
 
 function findPopularCity(iata){
     axios
-    .get(`https://api.travelpayouts.com/v1/city-directions?origin=${iata}&currency=usd&token=a4afad13a7337940879a2f94505872ab`)
+    .get(proxy+`http://api.travelpayouts.com/v1/city-directions?origin=${iata}&currency=usd&token=a4afad13a7337940879a2f94505872ab`)
     .then(response=>{
         Object.keys(response.data.data).map(key=>{
             state.Popular.price.push(response.data.data[key].price)
@@ -122,7 +122,7 @@ function findPopularCity(iata){
     });
 };
 function popularCityCodeToName(code){
-    axios.get('https://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
+    axios.get(proxy+'http://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
     .then(response=>{
         response.data.map(key=>{
             Object.keys(code).map(codeKey=>{
@@ -134,7 +134,7 @@ function popularCityCodeToName(code){
     });
 };
 function getCityPicture(cityName){
-    axios.get(`https://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=city of ${cityName}&image_type=photo&category=places&editors_choice="true"`)
+    axios.get(`http://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=city of ${cityName}&image_type=photo&category=places&editors_choice="true"`)
     .then(response=>{
         console.log(response)
         state.Popular.picture.push(response.data.hits[0].webformatURL);
@@ -145,7 +145,7 @@ function getCityPicture(cityName){
 
 //Cheapest Tickets page
 function tickets(code){
-    axios.get(proxy+`https://api.travelpayouts.com/v1/prices/cheap?currency=usd&origin=${code}&destination=-&token=a4afad13a7337940879a2f94505872ab`)
+    axios.get(proxy+`http://api.travelpayouts.com/v1/prices/cheap?currency=usd&origin=${code}&destination=-&token=a4afad13a7337940879a2f94505872ab`)
     .then(resp=>{
         Object.keys(resp.data.data).map((value)=>{
             let x = Object.values(resp.data.data[value]);
@@ -156,7 +156,7 @@ function tickets(code){
 };
 
 function city(code, fn, p){
-    axios.get(proxy+'https://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
+    axios.get(proxy+'http://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab')
     .then(response=>{
         response.data.map(key=>{
             if(key.code === code){
@@ -169,7 +169,7 @@ function city(code, fn, p){
     });
 };
 function airportCodeToName(code){
-    axios.get(proxy+`https://api.travelpayouts.com/data/en/airlines.json?token=a4afad13a7337940879a2f94505872ab`)
+    axios.get(proxy+`http://api.travelpayouts.com/data/en/airlines.json?token=a4afad13a7337940879a2f94505872ab`)
     .then(resp=>{
         resp.data.map(key=>{
             if(key.code === code){
