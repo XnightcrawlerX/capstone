@@ -1,0 +1,32 @@
+@media screen and (max-width:667px){
+    /*Home*/
+    .form-container{
+        height:56vh
+    }
+    .form-container .sbmt{
+        width: 64vw;
+    }
+    /*Results*/
+    .results .price p{
+        margin-top: 10vh;
+    }
+    .results .oc{
+        margin-left: 3vw;
+    }
+    .results .dc{
+        margin-left: 24vw;
+    }
+    /*Popular*/
+    .popular{
+        width: 60vw;
+    }
+    .popular-gallery .price{
+        margin-top: 0;
+        height:12vh;
+        color: dodgerblue;
+    }
+    /*Contact*/
+    .contacts-left{
+        height:135vh;
+    }
+}
