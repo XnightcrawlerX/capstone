@@ -1,9 +1,22 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #0d2631;
+    font-weight: bold;
+}
+
 /*Homepage Nav */
 .header{
-    background-color: rgb(255, 255, 255);
-    display: grid;
+    height: 60px;
+    /* border: thin solid black; */
+    background-color:  #0d2631;
+    /* display: grid; */
+    display: flex;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: .5fr 2fr .5fr;
+    align-items: center;
+    justify-content: space-around;
+    text-transform: uppercase;
 }
 .logo{
     grid-area: 2;
@@ -22,10 +35,12 @@
 .menu{
     position: relative;
     grid-area: 2;
-    text-align: center;
-    text-align: center;
+    height: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* display: flex; */
+    justify-content: space-around;
+    width: 35%;
 }
 .form-container{
         height: 36vh;
@@ -58,8 +73,19 @@
 }
 /*Menu items*/
 .menu a{
-    border: thin solid green;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 2.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.menu a:hover {
+    color: #42e1e5;
+}
+
 /*Main container for all data*/
 .main-container{
     height: 100vh;
@@ -67,11 +93,89 @@
     grid-template-rows: 1fr 10fr .5fr;
 }
     /*Home Page*/
-.main{
+.main-container{
     background: url('https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
     background-size: cover;
     background-repeat: no-repeat;
 
+}
+/*input form on homepage*/
+.form-container{
+    position: relative;
+    left: 50%;
+    top: 25%;
+    height: 50%;
+    width: 40%;
+    background-color: #E6E9ED;
+    border-radius: 8px;
+    font-size: 18px;
+}
+/*input field container*/
+.form-field{
+    position: absolute;
+    left: 2%;
+    top: 5%;
+    width:95%;
+    height: 90%;
+    background-color: transparent;
+    box-shadow: 5px 4px 3px rgb(172, 171, 171);
+    display: grid;
+    border-radius: 4px;
+    box-shadow: none;
+    column-gap: 7px;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-areas:
+    " .      .     .     .    .      .    .    . "
+    " or    or     .     .    d      d    .    . "
+    "city  city  city  city  dest  dest dest dest"
+    "city  city  city  city  dest  dest dest dest"
+    "dname dname rname  rname   . sbmt sbmt   .  "
+    "depdt depdt rtndt  rtndt   . sbmt sbmt   .  "
+    "depdt depdt rtndt  rtndt   .    .    .    . ";
+}
+.form-city-origin-small{
+    grid-area: or;
+    color: gray;
+    position: absolute;
+    top: 30%;
+    font-size: 18px;
+}
+.form-city-dest-small{
+    grid-area: d;
+    color: gray;
+    position: absolute;
+    top: 30%;
+    font-size: 18px;
+}
+
+.form-container input{
+    margin-top: 10px;
+    height: 28px;
+    position: absolute;
+    border: none;
+    border-radius: 8px;
+}
+.form-container p{
+    position: absolute;
+    top:-15%;
+    font-size: 11px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.input-city{
+    grid-area: city;
+}
+.input-city-dest{
+    grid-area: dest;
+}
+.dep-date{
+    position: absolute;
+    grid-area: depdt;
+}
+.rtn-date{
+    position: absolute;
+    grid-area: rtndt;
 }
 /*results page*/
 .results{
@@ -160,7 +264,7 @@
 }
 /*Footer*/
 .footer{
-    background-color: rgb(220, 229, 229);
+    background-color: white;
     text-align: center;
 }
 .footer a{
@@ -315,8 +419,20 @@
 .message::placeholder {
     line-height: 40px;
 }
-.submit{
-    grid-area: sub;
+input#submit{
+    grid-area: sbmt;
+    background-color:#3a91ff;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    height: 35px;
+    top: 25%;
+    width: 100%;
+    letter-spacing: 2.5px;
+}
+
+input#submit:hover {
+    background-color: #42e1e5;
 }
 /*Contact us */
 .contacts-left hr{
