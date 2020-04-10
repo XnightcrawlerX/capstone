@@ -3,7 +3,7 @@ export default () =>{
 <section class="main-container">
     <section class="header">
     <div class="logo">
-        <i class="fas fa-plane fa-4x" style="color:dodgerblue"></i>
+        <i class="fas fa-plane fa-3x" style="color:#3a91ff"></i>
     </div>
     <section class="menu">
         <a class="menu-items" href="#">Home</a>
