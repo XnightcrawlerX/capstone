@@ -10,9 +10,9 @@ ${st.picture.map((result, index)=>{
 
 function formatResult(url, city, price){
     return`
-    <a href="#" class="popular-results" style="background: url( ${url} ); background-repeat: no-repeat; background-size:cover">
-    <div class="city-name">${city}</div>
-    <div class="price">${price}</div>
+    <a href="#" alt="${city}:${price}" class="popular-gallery" style="background: url( ${url} ); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <div class="city-name">${city}</div>
+        <div class="price">$${price}</div>
     </a>
     `
 }  

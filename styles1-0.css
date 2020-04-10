@@ -22,6 +22,15 @@
     grid-area: 2;
     text-align: center;
 }
+.fa-plane{
+    text-decoration: none;
+}
+.fa-bars{
+    display: none;
+}
+.dropdown{
+    display: none;
+}
 /*Menu container*/
 .menu{
     position: relative;
@@ -32,6 +41,35 @@
     /* display: flex; */
     justify-content: space-around;
     width: 35%;
+}
+.form-container{
+        height: 36vh;
+        width: 30vw;
+        margin-left: 55.5vw;
+        margin-top: 25vh; 
+        display: grid;
+        grid-template-columns: repeat(6,1fr);
+        grid-template-rows: repeat(10,1fr);
+        column-gap: .4vw;
+}
+.form-container .city{
+    grid-area: 1/1;
+    height: 5vh;
+}
+.form-container .dest{
+    grid-area: 1/2;
+    height: 5vh;
+}
+.form-container .dep-date{
+    grid-area: 3/1;
+    height:5vh
+}
+.form-container .rtn-date{
+    grid-area: 3/2;
+    height:5vh
+}
+.form-container .sbmt{
+    grid-area: 5/1/span 1/3;
 }
 /*Menu items*/
 .menu a{
@@ -158,7 +196,6 @@
 .results .price{
     
     background-color: dodgerblue;
-    border: thin solid black;
     height: 75%;
     width: 75%;
     margin-left: 13%;
@@ -240,27 +277,92 @@
 .popular{
     position: relative;
     margin: 0 auto;
-    border: thin solid black;
-    width: 70%;
+    width: 40vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, 1fr);
-    row-gap: 3px;
-    column-gap: 3px;
+    row-gap: 1.5vw;
 }
-.popular-results{
-    text-align: center;
-
+.popular-gallery{
+    border: thin solid black;
+    display: grid;
+    height: 425px;
+    width: 640px;
+    grid-template-columns:  repeat(3, 1fr);
+    grid-template-rows: 1fr 2fr 1fr 1fr 2fr;
+    text-decoration: none;
 }
 .city-name{
-    margin-top: 43%;
+    margin-top: 6.7vh;
+    padding-top: 1vh;
     background-color: honeydew;
+    grid-area: 5/2;
+    width: 100%;
+    height: 4vh;
+    text-align: center;
+    font-size: 25px;
+    border: thin solid black;
+    border-bottom: thin solid white;
+    color: dodgerblue;
 }
+.popular-gallery .price{
+    border: thin solid black;
+    grid-area: 1/2;
+    font-size: 34px;
+    color: dodgerblue;
+    text-align: center;
+    height: 4vh;
+    width: 100%;
+    background-color: white;
+}
+.popular-gallery
 /*------------------------------------*/
+/*Cheapest page */
+.cheapest{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.cheap-page-container{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.cheap-page-container a{
+    border: thin solid black ;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(6,.5fr);
+    margin-bottom: .5%;
+}
+.cheap-page-container a:hover{
+    background-color: rgb(214, 213, 213);
+}
+.cheap-page-container .origin{
+    text-align: center;
+    grid-area: 1/3;
+}
+.cheap-page-container i{
+    grid-area: 1/4;
+    text-align: center;
+}
+.cheap-page-container .code{
+    text-align: center;
+    grid-area: 1/5;
+}
+.cheap-page-container .ct-name{
+    grid-area: 2/1/ span 3/3;
+}
+.cheap-page-container .apl-name{
+    text-align: right;
+    grid-area: 4/2/ span 2/6;
+}
+.cheap-page-container .price{
+    grid-area: 3/6/ span 4/8;
+    text-align: center;
+    font-size: 20px;
+}
 /* contacts page */
 .contacts{
     font-family: Arial, Helvetica, sans-serif;
-    border: thin solid black;
     display: grid;
     background-color: rgb(233, 233, 233);
 }
@@ -332,6 +434,7 @@ input#submit{
 input#submit:hover {
     background-color: #42e1e5;
 }
+/*Contact us */
 .contacts-left hr{
     grid-area: hr;
     height: 56%;
@@ -340,7 +443,6 @@ input#submit:hover {
     top: 28.2%;
     color: rgb(255, 255, 255);
 }
-
 .contact-us{
     grid-area: contact;
     display: grid;
@@ -362,8 +464,6 @@ input#submit:hover {
 .bh1{
     grid-area: bh1;
 }
-/*------------------------------------*/
-/*Contact us */
 .about{
     display: grid;
     grid-template-columns: repeat(15, 1fr);
@@ -371,5 +471,4 @@ input#submit:hover {
 }
 .main-about-content{
     grid-area: 2 /2 /span 5 / span 12 ;
-    border: thin solid black;
 }
