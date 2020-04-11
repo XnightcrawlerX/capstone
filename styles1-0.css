@@ -4,7 +4,9 @@
     color: #0d2631;
     font-weight: bold;
 }
-
+.main{
+    height: 85vh;
+}
 /*Homepage Nav */
 .header{
     height: 60px;
@@ -26,50 +28,77 @@
     text-decoration: none;
 }
 .fa-bars{
-    display: none;
+    display: block;
+    height: 8vh;
+    color: dodgerblue;
+    background-color: transparent;
+    border: none;
+    font-size: 55px;
 }
 .dropdown{
+    z-index: 2;
+    position: absolute;
+    margin-top: 12vh;
+    width: 100vw;
+    background-color: white;
     display: none;
+    text-align: center;
+    font-size: 15px;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: 1fr;
+}
+.dropdown a{
+    color: dodgerblue;
+    text-decoration: none;
+    border: thin solid black;
+}
+.dropdown a:hover{
+    background-color: #0d2631;
 }
 /*Menu container*/
 .menu{
+    text-decoration: none;
     position: relative;
     grid-area: 2;
     height: 50px;
-    display: grid;
+    display: none;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     /* display: flex; */
     justify-content: space-around;
     width: 35%;
 }
+/*input form on homepage*/
 .form-container{
-        height: 36vh;
-        width: 30vw;
-        margin-left: 55.5vw;
-        margin-top: 25vh; 
-        display: grid;
-        grid-template-columns: repeat(6,1fr);
-        grid-template-rows: repeat(10,1fr);
-        column-gap: .4vw;
+    position: relative;
+    left: 15%;
+    top: 40%;
+    height: 50%;
+    width: 70%;
+    background-color: transparent;
+    font-size: 18px;
 }
-.form-container .city{
-    grid-area: 1/1;
+.form-container #origin{
+    height: 5vh;
+    width: 69.9vw;
+}
+.form-container #destination{
+    width: 69.9vw;
     height: 5vh;
 }
-.form-container .dest{
-    grid-area: 1/2;
+.form-container #departing{
+    width: 69.9vw;
+    height:5vh
+}
+.form-container #arriving{
+    width: 69.9vw;
+    height:5vh
+}
+.form-container #submit{
+    background-color: dodgerblue;
+    border: none;
+    margin-top: 2vh;
+    width: 69.9vw;
     height: 5vh;
-}
-.form-container .dep-date{
-    grid-area: 3/1;
-    height:5vh
-}
-.form-container .rtn-date{
-    grid-area: 3/2;
-    height:5vh
-}
-.form-container .sbmt{
-    grid-area: 5/1/span 1/3;
 }
 /*Menu items*/
 .menu a{
@@ -96,97 +125,23 @@
 .main-container{
     background: url('https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
     background-size: cover;
+    background-position: -40vw;
     background-repeat: no-repeat;
-
-}
-/*input form on homepage*/
-.form-container{
-    position: relative;
-    left: 50%;
-    top: 25%;
-    height: 50%;
-    width: 40%;
-    background-color: #E6E9ED;
-    border-radius: 8px;
-    font-size: 18px;
-}
-/*input field container*/
-.form-field{
-    position: absolute;
-    left: 2%;
-    top: 5%;
-    width:95%;
-    height: 90%;
-    background-color: transparent;
-    box-shadow: 5px 4px 3px rgb(172, 171, 171);
-    display: grid;
-    border-radius: 4px;
-    box-shadow: none;
-    column-gap: 7px;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-template-areas:
-    " .      .     .     .    .      .    .    . "
-    " or    or     .     .    d      d    .    . "
-    "city  city  city  city  dest  dest dest dest"
-    "city  city  city  city  dest  dest dest dest"
-    "dname dname rname  rname   . sbmt sbmt   .  "
-    "depdt depdt rtndt  rtndt   . sbmt sbmt   .  "
-    "depdt depdt rtndt  rtndt   .    .    .    . ";
-}
-.form-city-origin-small{
-    grid-area: or;
-    color: gray;
-    position: absolute;
-    top: 30%;
-    font-size: 18px;
-}
-.form-city-dest-small{
-    grid-area: d;
-    color: gray;
-    position: absolute;
-    top: 30%;
-    font-size: 18px;
-}
-
-.form-container input{
-    margin-top: 10px;
-    height: 28px;
-    position: absolute;
-    border: none;
-    border-radius: 8px;
-}
-.form-container p{
-    position: absolute;
-    top:-15%;
-    font-size: 11px;
-    margin: 0 auto;
-    margin-top: 20px;
-}
-.input-city{
-    grid-area: city;
-}
-.input-city-dest{
-    grid-area: dest;
-}
-.dep-date{
-    position: absolute;
-    grid-area: depdt;
-}
-.rtn-date{
-    position: absolute;
-    grid-area: rtndt;
+    overflow: scroll;
 }
 /*results page*/
 .results{
     margin-left: 5%;
     margin-right: 5%;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content;
     row-gap: 2px;
+    margin-bottom: 5vh;
 }
 .results a{
+    background-color: rgba(223, 223, 223, 0.632);
+    height: 20vh;
     text-decoration: none;
     border: thin solid gray;
     display: grid;
@@ -194,21 +149,13 @@
     grid-template-rows: repeat(5,1fr);
 }
 .results .price{
-    
     background-color: dodgerblue;
-    height: 75%;
-    width: 75%;
-    margin-left: 13%;
-    margin-top: 13%;
-    grid-area: 1/4/ span 6;
+    grid-area: 2/3/ span 3/6;
     text-align: center;
     font-size: 30px;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr 2fr 1fr;
-}
-.results a:hover{
-    background-color: rgba(223, 223, 223, 0.632);
 }
 .results .price p{
     color: black;
@@ -220,90 +167,97 @@
 	transform: translateY(-1px);
 }
 .results .origin{
-    margin-top: 25%;
     text-align: center;
-    grid-area: 3/1;
+    grid-area: 1/1/span 1/4;
 }
 .results .oc{
     color: gray;
     font-size: 10px;
     text-align: center;
-    grid-area: 4/1;
+    grid-area: 2/2;
 }
 .fa-plane-departure{
-    color: rgb(202, 201, 201);
+    font-size: 20px;
+    color: black;
     margin: auto;
-    grid-area: 3/2/ span 2/3;
+    grid-area: 1/4
 }
 .results .destination{
-    margin-top: 25%;
     text-align: center;
-    grid-area: 3/3;
+    grid-area: 1/5/span 1/8;
 }
 .results .dc{
     color: gray;
     font-size: 10px;
     text-align: center;
-    grid-area: 4/3;
+    grid-area: 2/6;
 }
 .results .dd{
-    margin-top: 25%;
     text-align: center;
-    grid-area: 3/5;
+    grid-area: 5/1/span 5/4;
 }
 .fa-plane-arrival{
-    color: rgb(202, 201, 201);
+    font-size: 20px;
+    color: black;
     text-align: center;
     margin: auto;
-    grid-area: 3/6/ span 2/6;
+    grid-area: 5/4;
 }
 .results .rd{
     text-align: center;
-    margin-top: 25%;
-    grid-area: 3/7;
+    grid-area: 5/5/span 5/8;
 }
 /*Footer*/
 .footer{
     background-color: white;
     text-align: center;
+    height: 5.1vh;
 }
 .footer a{
     color: inherit;
+    color: dodgerblue;
     padding:0px .5%;
 }
 
 /*------------------------------------*/
 /* Popular page */
 .popular{
+    border: thin solid black;
     position: relative;
     margin: 0 auto;
-    width: 40vw;
+    width: 100vw;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(5, 1fr);
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content;
     row-gap: 1.5vw;
 }
 .popular-gallery{
     border: thin solid black;
     display: grid;
-    height: 425px;
-    width: 640px;
+    height: 50vh;
+    width: 99.8vw;
     grid-template-columns:  repeat(3, 1fr);
     grid-template-rows: 1fr 2fr 1fr 1fr 2fr;
     text-decoration: none;
+    margin-bottom: 1vh;
 }
 .city-name{
-    margin-top: 6.7vh;
+    margin-top: 9.1vh;
+    margin-left: 4vw;
     padding-top: 1vh;
     background-color: honeydew;
     grid-area: 5/2;
-    width: 100%;
-    height: 4vh;
+    width: max-content;
+    height: max-content;
     text-align: center;
     font-size: 25px;
     border: thin solid black;
-    border-bottom: thin solid white;
     color: dodgerblue;
+}
+.popular-gallery:hover .city-name{
+    background-color: #0d2631;
 }
 .popular-gallery .price{
     border: thin solid black;
@@ -311,116 +265,111 @@
     font-size: 34px;
     color: dodgerblue;
     text-align: center;
-    height: 4vh;
+    height: 6vh;
     width: 100%;
     background-color: white;
 }
-.popular-gallery
-/*------------------------------------*/
+.popular-gallery:hover .price{
+    background-color: #0d2631;
+}
 /*Cheapest page */
 .cheapest{
     margin-left: 5%;
     margin-right: 5%;
 }
 .cheap-page-container{
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
 .cheap-page-container a{
     border: thin solid black ;
     display: grid;
     grid-template-columns: repeat(7,1fr);
-    grid-template-rows: repeat(6,.5fr);
+    grid-template-rows: repeat(10, .5fr);
     margin-bottom: .5%;
+    text-decoration: none;
+    background-color: white;
 }
-.cheap-page-container a:hover{
-    background-color: rgb(214, 213, 213);
+.cheap-page-container a:hover .price{
+    background-color: #0d2631;
 }
 .cheap-page-container .origin{
     text-align: center;
-    grid-area: 1/3;
+    margin-top: 1vh;
+    grid-area: 4/1/span 5/3;
 }
 .cheap-page-container i{
+    display: none;
     grid-area: 1/4;
     text-align: center;
+    background: transparent;
 }
 .cheap-page-container .code{
+    margin-top: 1vh;
     text-align: center;
-    grid-area: 1/5;
+    grid-area: 4/6/span 4/8;
 }
 .cheap-page-container .ct-name{
-    grid-area: 2/1/ span 3/3;
+    grid-area: 1/1/ span 1/8;
+    text-align: center;
+    color: dodgerblue;
 }
 .cheap-page-container .apl-name{
-    text-align: right;
-    grid-area: 4/2/ span 2/6;
+    text-align: center;
+    grid-area: 9/1/span 9/8;
 }
 .cheap-page-container .price{
-    grid-area: 3/6/ span 4/8;
+    grid-area: 3/3/ span 5/6;
+    color: dodgerblue;
+    border: thin solid black;
+    background-color: white;
     text-align: center;
-    font-size: 20px;
+    font-size: 40px;
 }
 /* contacts page */
 .contacts{
     font-family: Arial, Helvetica, sans-serif;
-    display: grid;
     background-color: rgb(233, 233, 233);
 }
 .contacts-left{
     border: thin solid red;
-    height:90%;
     width: 90%;
     margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows:  1fr 1fr 1fr 1fr 1fr 1fr .5fr;
-    grid-template-areas: 
-    "  .   .      .   head head  head  head   .      .            ."
-    "form form  form  form form    hr     contact contact contact ."
-    "form form  form  form form    hr     contact contact contact ."
-    "form form  form  form form    hr     contact contact contact ."
-    "form form  form  form form    hr     contact contact contact ."
-    "form form  form  form form    hr     contact contact contact ."
-    "  .   .      .     .   .      .        .       .       .     ."
-    ;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(13,1fr);
 }
 .contacts-left h1{
-    grid-area: head;
+    grid-area: 1/1/span 2/9;
     text-align: center;
 }
 .contacts-left form{
-    grid-area: form;
+    grid-area: 3/2/span 8/8;
     grid-gap: 5px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    grid-template-areas: 
-    ". .  .  . .   . . ."
-    ". . fn fn fn fn . ."
-    ". . em em em em . ."
-    ". . mg mg mg mg . ."
-    ". . mg mg mg mg . ."
-    ". . mg mg mg mg . ."
-    ". . mg mg mg mg . ."
-    ". . mg mg mg mg . ."
-    ". . . sub sub . . ."
-    ". .  .  . .   . . ."
-    ;
+    grid-template-rows: repeat(8, 1fr);
 }
 .first-name{
-    grid-area: fn;
+    grid-area: 1/1/span 1/9;
+    width: 67vw;
 }
 .email{
-    grid-area: em;
+    width: 67vw;
+    height: 5.3vh;
+    grid-area: 2/1/span 2/9;
 }
 .message{
-    grid-area: mg;
+    width: 67vw;
+    grid-area: 3/1/span 5/6;
 }
 .message::placeholder {
     line-height: 40px;
 }
-input#submit{
-    grid-area: sbmt;
+.contacts-left .submit{
+    grid-area: 8/1/span 8/9;
     background-color:#3a91ff;
     border: none;
     color: white;
@@ -431,44 +380,30 @@ input#submit{
     letter-spacing: 2.5px;
 }
 
-input#submit:hover {
+.contacts-left .submit:hover {
     background-color: #42e1e5;
 }
 /*Contact us */
-.contacts-left hr{
-    grid-area: hr;
-    height: 56%;
-    position: absolute;
-    left:58%;
-    top: 28.2%;
-    color: rgb(255, 255, 255);
-}
 .contact-us{
-    grid-area: contact;
+    grid-area: 11/2/span 18/8;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(5,4fr);
-    grid-template-areas: 
-    ". . ctus ctus ctus ctus  . ."
-    ". . bh bh bh bh bh ."
-    ". . bh1 bh1 bh1 bh1 . ."
-    ". . bh2 bh2 bh2 bh2 . ."
-    ;
+    grid-template-rows: repeat(2,4fr);
 }
 .contact-us h4{
-    grid-area: ctus;
+    text-align: center;
+    color: dodgerblue;
+    grid-area: 1/1/span 1/9;
 }
 .bh{
-    grid-area: bh;
+    margin-top: 10vh;
+    grid-area: 1/1/span 2/9;
+    font-size: 13px;
 }
 .bh1{
+    display: none;
     grid-area: bh1;
 }
-.about{
-    display: grid;
-    grid-template-columns: repeat(15, 1fr);
-    grid-template-rows: repeat(15, 1fr);
-}
-.main-about-content{
-    grid-area: 2 /2 /span 5 / span 12 ;
+@media screen and (min-width:600px){
+      
 }

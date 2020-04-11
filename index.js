@@ -57,8 +57,8 @@ document.getElementById('submit').addEventListener("click", event=>{
     event.preventDefault()
     let origin = document.getElementById('origin').value;
     let destination = document.getElementById('destination').value;
-    let departure = document.getElementById('dep-date').value;
-    let returnDate = document.getElementById('rtn-date').value;
+    let departure = document.getElementById('departing').value;
+    let returnDate = document.getElementById('arriving').value;
     getCity()
         .then(response=>{
             response.data.map(keys=>{

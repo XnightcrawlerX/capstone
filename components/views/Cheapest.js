@@ -13,7 +13,7 @@ export default st => {
 
 function formatResults(ctCode, ctName, aplName, num, price, origin){
     return `
-    <a>
+    <a href="/">
         <div class="origin">${origin}</div>
         <i class="fas fa-long-arrow-alt-right"></i>
         <div class="code">${ctCode}</div>

@@ -3,7 +3,7 @@ export default st =>{
 <section class="main-container">
     <section class="header">
     <div class="logo">
-        <i class="fas fa-plane fa-3x" style="color:#3a91ff"></i>
+        <a href="/" class="fas fa-plane fa-3x" style="color:#3a91ff"></a>
     </div>
     <button id="Menu" class="fas fa-bars fa-4x"></button>
     <section class="menu">

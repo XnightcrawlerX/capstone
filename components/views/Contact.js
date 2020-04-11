@@ -9,7 +9,6 @@ export default () => {
     <input class="message" type="text" placeholder="Message">
     <input class="submit" type="submit" value="Submit">
     </form>
-    <hr>
     <div class="contact-us">
     <h4>need instant support?</h4>
     <p class=bh>&#8226 dimarobertson@gmail.com<br>&#8226 636-293-8601</p>
