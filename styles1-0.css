@@ -135,6 +135,7 @@
     grid-template-rows: max-content;
     row-gap: 2px;
     margin-bottom: 5vh;
+    margin-top: 5vh;
 }
 .results a{
     background-color: rgba(223, 223, 223, 0.632);
@@ -401,6 +402,26 @@
     display: none;
     grid-area: bh1;
 }
+@media screen and (orientation:landscape){
+    .form-container{
+        top:20%
+    }
+    .results a{
+        height:35vh;
+    }
+    .results .price{
+        font-size: 40px;
+        grid-area: 2/4/span 3/5;
+    }
+    .results .price p{
+        grid-area: 1/1/span 3/4;
+        margin-top: 5vh;
+    }
+    .footer{
+        height: 9vh;
+    }
+}
+
 @media screen and (min-width:600px){
     .logo{
         margin-left: -5vw;
