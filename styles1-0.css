@@ -10,18 +10,14 @@
 /*Homepage Nav */
 .header{
     height: 60px;
-    /* border: thin solid black; */
     background-color:  #0d2631;
-    /* display: grid; */
     display: flex;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: .5fr 2fr .5fr;
     align-items: center;
     justify-content: space-around;
     text-transform: uppercase;
 }
 .logo{
-    grid-area: 2;
+    padding-right: 50vw;
     text-align: center;
 }
 .fa-plane{
@@ -60,13 +56,27 @@
 .menu{
     text-decoration: none;
     position: relative;
-    grid-area: 2;
+    margin-right: 20vw;
     height: 50px;
     display: none;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 2vw;
     /* display: flex; */
     justify-content: space-around;
     width: 35%;
+}
+.menu a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 2.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu a:hover {
+    color: #42e1e5;
 }
 /*input form on homepage*/
 .form-container{
@@ -100,20 +110,6 @@
     margin-top: 2vh;
     width: 69.9vw;
     height: 5vh;
-}
-/*Menu items*/
-.menu a{
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    letter-spacing: 2.5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.menu a:hover {
-    color: #42e1e5;
 }
 
 /*Main container for all data*/
@@ -406,5 +402,25 @@
     grid-area: bh1;
 }
 @media screen and (min-width:600px){
-      
+    .logo{
+        margin-left: -5vw;
+        padding-right: 5vw;
+    }
+    .fa-bars{
+        display: none;
+    }
+    .menu{
+        display: grid;
+    }
+    .main-container{
+        background-position: 0;
+    }
+    .popular{
+        width: 99vw;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .popular-gallery{
+        margin-bottom: 0;
+        width: 49vw;
+    }
 }
