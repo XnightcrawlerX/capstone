@@ -5,7 +5,6 @@ import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
 const proxy = 'https://cors-anywhere.herokuapp.com/';
-
 //Main function
 async function render(st){
     document.querySelector('#root').innerHTML = `
@@ -17,7 +16,6 @@ async function render(st){
     addNavListener();
     barMenu();
 };
-
 //Routes
 const router = new Navigo(window.location.origin);
 router
@@ -38,8 +36,7 @@ function barMenu(){
     });
 };
 
-//Home Page Search
-//__________________________
+
 //Api call to get information of every city
 async function getCity(){
     const resp = await axios.get(proxy+'http://api.travelpayouts.com/data/en/cities.json?token=a4afad13a7337940879a2f94505872ab');
@@ -55,14 +52,27 @@ async function searchForTicket(o, d, dd, rd){
 //Nav listener for Home Page Input
 document.getElementById('submit').addEventListener("click", event=>{
     event.preventDefault()
+    let d = new Date();
     let origin = document.getElementById('origin').value;
     let destination = document.getElementById('destination').value;
-    let departure = document.getElementById('departing').value;
+    let departure = "";
+    if(d.getMonth() < 9){
+        departure = `${d.getFullYear()}-0${d.getMonth()+1}-${d.getDate()}`;
+    }
+    else{
+        departure = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+    }
     let returnDate = document.getElementById('arriving').value;
+    if(origin === ""){
+        axios.get('https://www.travelpayouts.com/whereami?locale=en&ip=')
+        .then(response=>{
+            state.result.originName = response.data.name;
+            state.result.originCode = response.data.iata;
+        });
+    };
     getCity()
         .then(response=>{
             response.data.map(keys=>{
-
                 // checks if city is equal to origin
                 if(keys.name === origin){
                     state.result.originName = keys.name;
@@ -135,8 +145,7 @@ function popularCityCodeToName(code){
 };
 function getCityPicture(cityName){
     axios.get(`https://pixabay.com/api/?key=15438259-6282fc2d733e8f5d4bdb809a9&q=city of ${cityName}&image_type=photo&category=places&editors_choice="true"`)
-    .then(response=>{
-        console.log(response)
+    .then(response=>{ 
         state.Popular.picture.push(response.data.hits[0].webformatURL);
         state.Popular.cityName.push(cityName);
     });

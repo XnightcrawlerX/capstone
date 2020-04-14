@@ -1,5 +1,4 @@
 export default st => {
-    console.log("objects in the export function of Cheapest.js", st)
     return`
 <section class="cheapest">
     <div class="cheap-page-container">

@@ -1,5 +1,4 @@
 export default st=> {
-    console.log("State in result.js", st)
     return `
     <section class="results"> 
     ${st.price.map((value, index)=>{
