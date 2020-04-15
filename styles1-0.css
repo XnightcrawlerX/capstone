@@ -20,6 +20,21 @@
     padding-right: 50vw;
     text-align: center;
 }
+.logo a{
+    display: inline-block;
+}
+.logo a .flight{
+    color: white;
+}
+.logo a .fare{
+    color: dodgerblue;
+}
+.logo a:hover .fare{
+    color: white;
+}
+.logo a:hover span{
+    color: dodgerblue;
+}
 .fa-plane{
     text-decoration: none;
 }
