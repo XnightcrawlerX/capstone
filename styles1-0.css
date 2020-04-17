@@ -102,8 +102,26 @@
     width: 70%;
     background-color: transparent;
     font-size: 18px;
+    text-align: center;
 }
-.form-container #origin{
+.form-container a{
+    border: thin solid black;
+    position: absolute;
+    text-decoration: none;
+    right: 5vw;
+    top: 10vh;
+    height: 6vh;
+    width: 60vw;
+    color: #0d2634;
+    font-size: 30px;
+    border-radius: 25px;
+    background-color: rgb(1, 255, 1);
+}
+.form-container a:hover{
+    color: #187095;
+}
+/*.
+form-container #origin{
     height: 5vh;
     width: 69.9vw;
 }
@@ -430,48 +448,45 @@
         left:57%;
         width: 30%;
     }
-    .form-container #origin{
-        width: 30vw;
-    }
-    .form-container #destination{
-        width: 30vw;
-    }
-    .form-container #departing{
-        width: 30vw;
-    }
-    .form-container #arriving{
-        width: 30vw;
-    }
-    .form-container #submit{
-        width: 30vw;
+    .form-container a{
+        top: 20vh;
     }
 }
-
+@media screen and (min-width:430px){
+    .main-container{
+        background-position-x: 10%;
+    }
+}
+@media screen and (min-width:600px){
+    .main-container{
+        background-position-x: 16%;
+    }
+    .form-container a{
+        top:30vh;
+    }
+}
 @media screen and (min-width:1500px) and (orientation:landscape){
     .form-container{
         left:47%;
         width: 21%;
     }
-    .form-container #origin{
-        width: 20vw;
+    .form-container a{
+        top:20vh;
     }
-    .form-container #destination{
-        width: 20vw;
-    }
-    .form-container #departing{
-        width: 20vw;
-    }
-    .form-container #arriving{
-        width: 20vw;
-    }
-    .form-container #submit{
-        width: 20vw;
-    }
+
 }
 
 @media screen and (orientation:landscape) and (min-width:667px) and (max-width:999px){
+    .main{
+        height: 60vh;
+    }
     .form-container{
-        top:20%
+        top:30%;
+    }
+    .form-container a{
+        height: 10vh;
+        width: 40vw;
+        right: 20vw;
     }
     .results a{
         height:35vh;
@@ -507,7 +522,7 @@
         display: grid;
     }
     .main-container{
-        background-position: 0;
+        background-position: 13%;
     }
     .popular{
         width: 99vw;
@@ -516,5 +531,8 @@
     .popular a{
         margin-bottom: 0;
         width: 49vw;
+    }
+    .form-container a{
+        top:10vh;
     }
 }
