@@ -7,6 +7,10 @@
 .main{
     height: 85vh;
 }
+.body{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
 /*Homepage Nav */
 .header{
     height: 60px;
