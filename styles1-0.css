@@ -158,7 +158,7 @@ form-container #origin{
 .main-container{
     background: url('https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
     background-size: cover;
-    background-position: -40vw;
+    background-position: -20vw;
     background-repeat: no-repeat;
     overflow: scroll;
 }
@@ -441,17 +441,12 @@ form-container #origin{
     display: none;
     grid-area: bh1;
 }
-
-@media screen and (min-width:1000px) and (orientation:landscape){
-    .form-container{
-        top:30%;
-        left:57%;
-        width: 30%;
-    }
-    .form-container a{
-        top: 20vh;
+@media screen and (min-width:375px){
+    .main-container{
+        background-position: 20%;
     }
 }
+
 @media screen and (min-width:430px){
     .main-container{
         background-position-x: 10%;
@@ -463,50 +458,6 @@ form-container #origin{
     }
     .form-container a{
         top:30vh;
-    }
-}
-@media screen and (min-width:1500px) and (orientation:landscape){
-    .form-container{
-        left:47%;
-        width: 21%;
-    }
-    .form-container a{
-        top:20vh;
-    }
-
-}
-
-@media screen and (orientation:landscape) and (min-width:667px) and (max-width:999px){
-    .main{
-        height: 60vh;
-    }
-    .form-container{
-        top:30%;
-    }
-    .form-container a{
-        height: 10vh;
-        width: 40vw;
-        right: 20vw;
-    }
-    .results a{
-        height:35vh;
-    }
-    .results .price{
-        font-size: 40px;
-        grid-area: 2/4/span 3/5;
-    }
-    .results .price p{
-        grid-area: 1/1/span 3/4;
-        margin-top: 5vh;
-    }
-    .popular a .price{
-        height: 10vh;
-    }
-    .city-name{
-        margin-left: 0;
-    }
-    .footer{
-        height: 9vh;
     }
 }
 
@@ -536,3 +487,81 @@ form-container #origin{
         top:10vh;
     }
 }
+
+@media screen and (orientation:landscape) and (min-width:667px) and (max-width:999px){
+    .main{
+        height: 60vh;
+    }
+    .main-container{
+        background-position: 0%;
+    }
+    .form-container{
+        top:50%;
+    }
+    .form-container a{
+        height: 10vh;
+        width: 40vw;
+        right: 20vw;
+    }
+    .results a{
+        height:35vh;
+    }
+    .results .price{
+        font-size: 40px;
+        grid-area: 2/4/span 3/5;
+    }
+    .results .price p{
+        grid-area: 1/1/span 3/4;
+        margin-top: 5vh;
+    }
+    .popular a .price{
+        height: 10vh;
+    }
+    .city-name{
+        margin-left: 0;
+    }
+    .footer{
+        height: 9vh;
+    }
+}
+
+@media screen and (min-width:1000px) and (orientation:landscape){
+    .form-container{
+        top:30%;
+        left:57%;
+        width: 30%;
+    }
+    .form-container a{
+        top: 20vh;
+        right: 20vw;
+        width: 30vw;
+        height: 10vh;
+    }
+}
+/*Laptop sideways*/
+@media screen and (min-width:950px){
+    .form-container a{
+        height: 4vh;
+        width: 30vw;
+        right: 20vw;
+    }
+}
+/*Laptop*/
+@media screen and (min-width:1280px){
+    .form-container a{
+        height: 4.5vh;
+    }
+}
+
+@media screen and (min-width:1500px) and (orientation:landscape){
+    .form-container{
+        left:47%;
+        width: 21%;
+    }
+    .form-container a{
+        top:20vh;
+        width: 20vw;
+    }
+
+}
+
