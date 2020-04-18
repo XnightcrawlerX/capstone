@@ -50,56 +50,56 @@ async function searchForTicket(o, d, dd, rd){
 }
 
 //Nav listener for Home Page Input
-document.getElementById('submit').addEventListener("click", event=>{
-    event.preventDefault()
-    let d = new Date();
-    let origin = document.getElementById('origin').value;
-    let destination = document.getElementById('destination').value;
-    let departure = "";
-    if(d.getMonth() < 9){
-        departure = `${d.getFullYear()}-0${d.getMonth()+1}-${d.getDate()}`;
-    }
-    else{
-        departure = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
-    }
-    let returnDate = document.getElementById('arriving').value;
-    if(origin === ""){
-        axios.get('https://www.travelpayouts.com/whereami?locale=en&ip=')
-        .then(response=>{
-            state.result.originName = response.data.name;
-            state.result.originCode = response.data.iata;
-        });
-    };
-    getCity()
-        .then(response=>{
-            response.data.map(keys=>{
-                // checks if city is equal to origin
-                if(keys.name === origin){
-                    state.result.originName = keys.name;
-                    state.result.originCode  = keys.code;
-                };
+// document.getElementById('submit').addEventListener("click", event=>{
+//     event.preventDefault()
+//     let d = new Date();
+//     let origin = document.getElementById('origin').value;
+//     let destination = document.getElementById('destination').value;
+//     let departure = "";
+//     if(d.getMonth() < 9){
+//         departure = `${d.getFullYear()}-0${d.getMonth()+1}-${d.getDate()}`;
+//     }
+//     else{
+//         departure = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+//     }
+//     let returnDate = document.getElementById('arriving').value;
+//     if(origin === ""){
+//         axios.get('https://www.travelpayouts.com/whereami?locale=en&ip=')
+//         .then(response=>{
+//             state.result.originName = response.data.name;
+//             state.result.originCode = response.data.iata;
+//         });
+//     };
+//     getCity()
+//         .then(response=>{
+//             response.data.map(keys=>{
+//                 // checks if city is equal to origin
+//                 if(keys.name === origin){
+//                     state.result.originName = keys.name;
+//                     state.result.originCode  = keys.code;
+//                 };
                 
-                // check if @city is equal to Destination
-                if(keys.name === destination){
-                    state.result.destCode = keys.code;
-                    state.result.destName = keys.name;
-                };
-            });
-            return response;
-        })
-        .then(resp =>{
-            searchForTicket(state.result.originCode, state.result.destCode, departure, returnDate)
-            .then(data=>{
-                data.data.data.map(key=>{
-                    // Pushes dates and the price to result.js
-                    state.result.departDate.push(key.depart_date);
-                    state.result.returnDate.push(key.return_date);
-                    state.result.price.push(key.value);
-                });
-                render(state.result);
-            });
-        });
-});
+//                 // check if @city is equal to Destination
+//                 if(keys.name === destination){
+//                     state.result.destCode = keys.code;
+//                     state.result.destName = keys.name;
+//                 };
+//             });
+//             return response;
+//         })
+//         .then(resp =>{
+//             searchForTicket(state.result.originCode, state.result.destCode, departure, returnDate)
+//             .then(data=>{
+//                 data.data.data.map(key=>{
+//                     // Pushes dates and the price to result.js
+//                     state.result.departDate.push(key.depart_date);
+//                     state.result.returnDate.push(key.return_date);
+//                     state.result.price.push(key.value);
+//                 });
+//                 render(state.result);
+//             });
+//         });
+// });
 
 //Nav for Home page Nav Menu
 function addNavListener(){
