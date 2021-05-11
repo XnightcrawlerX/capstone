@@ -35,7 +35,7 @@
     "babel": "^6.23.0",
     "dotenv": "^8.2.0",
     "firebase": "^7.14.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "navigo": "^7.1.2",
     "node-fetch": "^2.6.0",
     "parcel": "^1.12.4"
